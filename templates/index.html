@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Care Center</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('developer') }}">Developer</a></li>
+            <li><a href="{{ url_for('blog') }}">Blog</a></li>
+        </ul>
+    </nav>
+
+    <h1>Health Care Center</h1>
+    <form action="/predict" method="post">
+        <label for="symptoms">Enter Symptoms:</label>
+        <input type="text" id="symptoms" name="symptoms" placeholder="E.g., itching, headache">
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+    {% if predicted_disease %}
+        <h2>Predicted Disease: {{ predicted_disease }}</h2>
+        <p>Description: {{ dis_des }}</p>
+        
+        <h3>Precautions:</h3>
+        <ul>
+            {% for item in my_precautions %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Medications:</h3>
+        <ul>
+            {% for item in medications %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Workouts:</h3>
+        <ul>
+            {% for item in workout %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Diet Recommendations:</h3>
+        <ul>
+            {% for item in my_diet %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
